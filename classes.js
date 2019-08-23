@@ -29,7 +29,17 @@
   Call your class Employee and receive all the data in the constructor in the order listed above.
 */
 
-//Code Here
+class Employee {
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name
+    this.last_name = last_name
+    this.email = email
+    this.age = age
+  }
+  makeWidget() {
+    return `${this.first_name} ${this.last_name} Widget`
+  }
+}
 
 
 ////////// PROBLEM 2 //////////
@@ -47,7 +57,19 @@
   Call your new class Manager
 */
 
-//Code Here
+class Manager extends Employee {
+  constructor(first_name, last_name, email, age) {
+    super(first_name, last_name, email, age)
+    this.reports = []
+    // console.log(this.reports)
+  }
+  hire(employee) {
+    this.reports.push(employee)
+  }
+  fire(index) {
+    this.reports.splice(index, 1)
+  }
+}
 
 
 ////////// PROBLEM 3 //////////
@@ -72,6 +94,33 @@
 */
 
 //Code Here
+class ProgressiveManager extends Manager {
+  constructor(first_name, last_name, email, age, reports) {
+    super(first_name, last_name, email, age, reports)
+    this.title = 'Not a manager'
+    this.bonus = 0
+  }
+  hire() {
+    super.hire()
+    if (this.reports.legth === 0) {
+      this.title = 'Not a manager'
+    } else if (this.reports.length < 4) {
+      this.title = 'Barely Manager'
+    } else if (this.reports.length < 11) {
+      this.title = 'Mostly Manager'
+    } else if (this.reports.length < 51) {
+      this.title = 'Manager'
+    } else if (this.reports.length < 101) {
+      this.title = 'Manager Plus'
+    } else {
+      this.title = 'Bestest Manager'
+    }
+  }
+  fire() {
+    super.fire()
+    this.bonus += 100
+  }
+}
 
 
 
